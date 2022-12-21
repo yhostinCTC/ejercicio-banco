@@ -55,6 +55,18 @@ function consultarSaldo(posicionData){
     alert(`Saldo Disponible: ${data[posicionData][2]}`)
 }
 
+function retirarSaldo(posicionData){
+    let montoRetirar = parseInt(prompt("Monto a retirar: "));
+    if(montoRetirar <= data[posicionData][2]){
+        data[posicionData][2] -= montoRetirar;
+        alert('Monto retirado satisfactoriamente')
+    }
+    else{
+        alert('Monto supera el saldo disponible')
+    }
+
+}
+
 
 
 
