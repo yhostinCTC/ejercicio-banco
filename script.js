@@ -15,6 +15,8 @@ let data = [
     ['72386701', 'sho21', 500]
 ]
 
+// Resolviendo el punto numero 1
+
 function validarCredenciales(){
     let dni = prompt("Ingrese su DNI:")
     let existeDNI = false;
@@ -68,8 +70,61 @@ function retirarSaldo(posicionData){
 }
 
 
+function agregarSaldo(posicionData){
+    let montoAgregar = parseInt(prompt("Monto a agregar: "))
+    data[posicionData][2] += montoAgregar
+    alert("Monto agregado satisfactoriamente")
+}
 
 
-//  llamada a funciones
-consultarSaldo(1);
-validarCredenciales()
+function cambiarPassword(posicionData){
+    let validarPassword = false;
+    let intentos_disponibles = 3;
+
+    while(validarPassword == false && intentos_disponibles > 0){
+        let password = prompt("Ingrese su password actual")
+        if (password == data[posicionData][1]){
+            let new_password = prompt("Ingresa tu nuevo password")
+            data[posicionData][1] = new_password
+            validarPassword = true
+        }
+        else{
+            alert("Password incorrecto, intente de nuevo")
+            intentos_disponibles--
+        }
+    }
+}
+
+
+function menu(){
+
+    let terminar = false;
+    alert("Bienvenido a la caja de Yhostin:")
+    while(terminar == false){
+        
+        alert("Ingrese los siguientes datos que se le piden: ")
+        let posicionData = validarCredenciales();
+
+        if (posicionData === false){
+            continue;
+        }
+        else{
+            let opcion = prompt(" 1.Consultar saldo\n 2.Retirar dinero\n 3.Agregar dinero a tu cuenta.\n 4.Cambiar la password.")
+            if (opcion === '1'){
+                consultarSaldo(posicionData)
+            }
+            else if(opcion === '2'){
+                retirarSaldo(posicionData)
+            }
+            else if(opcion === '3'){
+                agregarSaldo(posicionData)
+            }
+            else if(opcion === '4'){
+                cambiarPassword(posicionData)
+            }
+        }
+    }
+}
+
+
+menu()
